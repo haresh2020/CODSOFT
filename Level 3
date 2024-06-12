@@ -1,0 +1,80 @@
+import java.util.*;
+
+ class Accounts {
+    static int a[] = new int[1000];
+
+    public int account(int i) {
+        return a[i];
+    }
+    public void update(int i,int amo){
+        a[i]=a[i]-amo;
+    }
+    public void add(int i,int amo){
+        a[i]=a[i]+amo;
+    }
+}
+
+class Atm {
+    Accounts a = new Accounts();
+    public int withdraw(int i, int am) {
+        Atm at = new Atm();
+        int amou = at.check(i);
+        if (amou>=am) {
+            a.update(i,am);
+            return 1;
+        } else {
+            System.out.print("InSufficient Balance");
+            return 0;
+        }
+    }
+
+    public void deposit(int i, int amo) {
+        a.add(i, amo);
+    }
+
+    public int check(int i) {
+        int k = a.account(i);
+        return k;
+    }
+}
+
+public class Level3 {
+    public static void main(String[] args) {
+       Scanner sc=new Scanner(System.in);
+       Atm a=new Atm();
+        System.out.println("Enter your Account Number to Proceed");
+        int i=sc.nextInt(),d=0;
+        do{
+            System.out.println("Enter 1 to Check the Balance");
+            System.out.println("Enter 2 to Deposit the Amount");
+            System.out.println("Enter 3 to Withdraw the Amount");
+            int c=sc.nextInt();
+            if(c==1){
+               int amo= a.check(i);
+               System.out.println("Your Balance is "+amo);
+            }
+            else if(c==2){
+                System.out.println("Enter the Amount to Deposit");
+                int amo=sc.nextInt();
+                a.deposit(i,amo);
+                System.out.println("Amount Deposited Succesfully");
+            }
+            else if(c==3){
+                System.out.println("Enter the Amount to Withdraw");
+                int amo=sc.nextInt();
+                int v=a.withdraw(i,amo);
+                if(v==1) {
+                    System.out.println("Amount Withdrawn");
+                }
+                else{
+                    System.out.print("Amount Not Withdrawn");
+                }
+            }
+            System.out.println("If you want to check more Press 1 or Press 0");
+            d=sc.nextInt();
+            if(d==0){
+                System.exit(0);
+            }
+        }while(d!=0);
+    }
+}
