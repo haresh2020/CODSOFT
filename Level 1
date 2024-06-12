@@ -1,0 +1,41 @@
+import java.util.*;
+public class Level1 {
+    public static int rand(){
+        int a= (int)Math.floor(Math.random()*100)+1;
+        return a;
+    }
+    public static void main(String[] args) {
+       int a= rand();
+       System.out.print(a);
+       int ans=-1,count=0,v=0,t=100;
+       Scanner sc=new Scanner(System.in);
+       do {
+           System.out.println("Enter a Number to Guess");
+           ans = sc.nextInt();
+           if (a > ans) {
+               System.out.println("Your Guess is Low");
+               count++;
+           } else if (ans > a) {
+               System.out.println("Your Guess is High");
+               count++;
+           }
+           if (count == 5) {
+               System.out.println("Game Over");
+           }
+           if(ans==a){
+               System.out.println("Guessed a Correct Number Do you want to go next Round if yes press 1 or 0");
+               v=sc.nextInt();
+               if(v==0){
+                   break;
+               }else{
+                   t=t+100;
+                   ans=-1;
+                   v=0;
+                   a=rand();
+                   System.out.println(a);
+               }
+           }
+       }while(ans!=a);
+       System.out.print("You Found a Correct Number and your Score is "+(t-count));
+    }
+}
